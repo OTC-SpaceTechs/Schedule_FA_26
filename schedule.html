@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Space Techs — Fall 2026 Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:   #12183a;
+    --teal:        #4FC3A1;
+    --gold:        #F0C674;
+    --starlight:   #EAF2FF;
+    --glass:       rgba(20, 27, 58, 0.5);
+    --hair:        rgba(234, 242, 255, 0.22);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html, body{
+    min-height:100%;
+  }
+
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--starlight);
+    background:#050818;
+    display:flex;
+    justify-content:center;
+    padding:40px 18px;
+  }
+
+  /* ---------- nebula backdrop ---------- */
+  .backdrop{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    overflow:hidden;
+    background:var(--navy-deep);
+  }
+  .backdrop img{
+    position:absolute;
+    top:50%; left:50%;
+    height:100vw;
+    width:auto;
+    max-width:none;
+    transform:translate(-50%, -50%) rotate(90deg);
+  }
+
+  .page{
+    position:relative;
+    z-index:10;
+    width:100%;
+    max-width:720px;
+    background:rgba(10,14,36,0.55);
+    backdrop-filter:blur(10px);
+    border:1px solid var(--hair);
+    border-radius:10px;
+    padding:0.7in 0.65in 0.55in;
+  }
+
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:12px;
+    border-bottom:1px solid var(--hair);
+    padding-bottom:16px; margin-bottom:22px;
+  }
+
+  h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:34px;
+    letter-spacing:-0.01em;
+  }
+  h2 .accent{ color:var(--teal); }
+
+  .manifest-note{
+    font-size:12px;
+    color:rgba(234,242,255,0.6);
+    max-width:2.3in;
+    text-align:right;
+    line-height:1.4;
+  }
+
+  .manifest{
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+    padding:6px 0 10px;
+  }
+
+  .month-label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:6px;
+  }
+  .month-label .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 8px var(--gold);
+  }
+  .month-label .name{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  table.rows{
+    width:100%;
+    border-collapse:collapse;
+  }
+  table.rows tr{
+    border-bottom:1px dashed var(--hair);
+  }
+  table.rows tr:last-child{ border-bottom:none; }
+
+  table.rows td{
+    padding:13px 6px;
+    vertical-align:top;
+  }
+
+  td.date{
+    width:1.1in;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:var(--teal);
+    white-space:nowrap;
+  }
+  td.event{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:500;
+    font-size:14px;
+    color:var(--starlight);
+  }
+
+  .standing-info{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    flex-wrap:wrap;
+    margin-top:26px;
+    padding:18px 22px;
+    background:var(--glass);
+    border:1px solid var(--hair);
+    border-radius:4px;
+  }
+  .standing-info .qr-col{
+    flex:0 0 auto;
+    background:var(--starlight);
+    padding:6px;
+    border-radius:3px;
+    line-height:0;
+  }
+  .standing-info .qr-col img{
+    width:64px; height:64px; display:block;
+  }
+  .standing-info .standing-col{ flex:1 1 auto; }
+  .standing-info .label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:9.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:6px;
+  }
+  .standing-info .value{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:13.5px;
+    color:var(--starlight);
+    line-height:1.35;
+  }
+  .standing-info .value a{
+    color:var(--teal);
+    text-decoration:none;
+    border-bottom:1px solid rgba(79,195,161,0.5);
+  }
+  .standing-info .value a:hover{
+    border-bottom-color:var(--teal);
+  }
+
+  footer{
+    margin-top:18px;
+    padding-top:14px;
+    border-top:1px solid var(--hair);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+  }
+  footer .tagline{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:12.5px;
+    color:rgba(234,242,255,0.5);
+  }
+
+  @media (max-width:520px){
+    .page{ padding:0.5in 0.4in 0.4in; }
+    h2{ font-size:26px; }
+    header{ flex-direction:column; align-items:flex-start; }
+    .manifest-note{ text-align:left; max-width:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="backdrop"><img src="galactic-center.jpg" alt=""></div>
+
+<div class="page">
+  <header>
+    <h2>FALL <span class="accent">2026</span><br>MISSION MANIFEST</h2>
+    <div class="manifest-note">Semester schedule &mdash; dates and details subject to confirmation.</div>
+  </header>
+
+  <div class="manifest">
+
+    <div class="month-block">
+      <div class="month-label"><span class="dot"></span><span class="name">August</span></div>
+      <table class="rows">
+        <tr><td class="date">Aug 28</td><td class="event">Fall Picnic</td></tr>
+      </table>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label"><span class="dot"></span><span class="name">September</span></div>
+      <table class="rows">
+        <tr><td class="date">Sep 4</td><td class="event">Welcome Back Party</td></tr>
+        <tr><td class="date">Sep 11</td><td class="event">Rocketry Cert Meeting</td></tr>
+        <tr><td class="date">Sep 18</td><td class="event">Resume Workshop</td></tr>
+        <tr><td class="date">Sep 25</td><td class="event">Fundraiser Planning</td></tr>
+      </table>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label"><span class="dot"></span><span class="name">October</span></div>
+      <table class="rows">
+        <tr><td class="date">Oct 4</td><td class="event">Balloon Launch (Tentative)</td></tr>
+        <tr><td class="date">Oct 23</td><td class="event">Fundraiser</td></tr>
+        <tr><td class="date">Oct 30</td><td class="event">Halloween Party</td></tr>
+      </table>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label"><span class="dot"></span><span class="name">November</span></div>
+      <table class="rows">
+        <tr><td class="date">Nov 13</td><td class="event">Rocketry Certification Meeting</td></tr>
+        <tr><td class="date">Nov 16&ndash;20</td><td class="event">Thanksgiving Break</td></tr>
+      </table>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label"><span class="dot"></span><span class="name">December</span></div>
+      <table class="rows">
+        <tr><td class="date">Dec 4</td><td class="event">Final Meeting</td></tr>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="standing-info">
+    <div class="qr-col">
+      <img src="qr-code.png" alt="QR code linking to the Space Techs Discord server">
+    </div>
+    <div class="standing-col">
+      <div class="label">Join the Discord</div>
+      <div class="value">OTC SEDS &mdash; Space Techs server<br><a href="https://discord.gg/9ZQ2pAdfsm">discord.gg/9ZQ2pAdfsm</a></div>
+    </div>
+    <div class="standing-col">
+      <div class="label">Questions</div>
+      <div class="value">spacetechs@otc.edu</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="tagline">Reaching for the stars, one semester at a time.</div>
+  </footer>
+</div>
+
+</body>
+</html>
