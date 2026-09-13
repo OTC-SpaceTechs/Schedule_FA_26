@@ -180,6 +180,26 @@
   }
   table.rows tr:last-child{ border-bottom:none; }
 
+  tr.total-row{
+    border-top:1px solid var(--hair);
+    border-bottom:none;
+  }
+  tr.total-row td.item{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--teal);
+  }
+  tr.total-row td.weight{
+    color:var(--teal);
+    font-weight:600;
+  }
+  tr.total-row td.notes{
+    font-size:11.5px;
+    font-style:italic;
+  }
+
   table.rows td{
     padding:13px 6px;
     vertical-align:top;
@@ -210,6 +230,13 @@
   td.tag.ordered{ color:var(--gold); }
   td.tag.not-ordered{ color:var(--coral); }
   td.tag.researching{ color:var(--gold); }
+  td.weight{
+    width:0.75in;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:rgba(234,242,255,0.55);
+    white-space:nowrap;
+  }
   td.notes{
     font-size:12.5px;
     color:rgba(234,242,255,0.65);
@@ -336,55 +363,78 @@
           <td class="qty">1x</td>
           <td class="item"><a href="https://www.the-rocketman.com/products/hab-kit-complete-package" target="_blank">Balloon Kit</a></td>
           <td class="tag ordered">ordered</td>
+          <td class="weight">N/A</td>
           <td class="notes">Ordered from Rocket Man - $425</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
           <td class="item"><a href="https://www.amazon.com/dp/B08F998MFH" target="_blank">Spot Gen 4 Satellite GPS Messenger</a></td>
           <td class="tag ordered">ordered</td>
+          <td class="weight">5.01 oz</td>
           <td class="notes">Amazon - $99.99</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
           <td class="item"><a href="https://www.amazon.com/Apple-AirTag-2nd-Generation-Precision/dp/B0GJTFXNRX/" target="_blank">Apple AirTag (2nd Gen)</a></td>
           <td class="tag ordered">ordered</td>
+          <td class="weight">0.42 oz</td>
           <td class="notes">Amazon - $24.00</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
           <td class="item">Helium</td>
           <td class="tag not-ordered">not-ordered</td>
+          <td class="weight">N/A</td>
           <td class="notes">Rough estimate - $250</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
           <td class="item"><a href="https://www.amazon.com/dp/B0BNHJJMB5" target="_blank">BME280 Temp/Humidity/Pressure Sensor</a></td>
           <td class="tag not-ordered">not-ordered</td>
+          <td class="weight">1.41 oz</td>
           <td class="notes">Amazon - $14.35</td>
         </tr>
         <tr>
           <td class="qty">2x</td>
           <td class="item"><a href="https://www.amazon.com/Tadiran-Batteries-TL-5903-Non-Rechargeable-Battery/dp/B011NEBR80" target="_blank">Tadiran TL-5903 Battery</a></td>
           <td class="tag not-ordered">not-ordered</td>
+          <td class="weight">0.64 oz each</td>
           <td class="notes">Amazon - $12.02 each</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
           <td class="item"><a href="https://www.amazon.com/ACEBOTT-Development-Board-Compatible-Arduino/dp/B0D5D7Q42V/" target="_blank">ESP32 Development Board</a></td>
           <td class="tag not-ordered">not-ordered</td>
+          <td class="weight">~3.53 oz</td>
           <td class="notes">Amazon - ACEBOTT - $11.99</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
           <td class="item"><a href="https://www.amazon.com/dp/B0H11VRYCL?lv=shuf&crid=3LOOR0EXYRE31&keywords=Arduino%2BNano&sprefix=arduino%2Bnano%2Caps%2C171&th=1&dib_tag=se&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&dib=eyJ2IjoiMSJ9.ASXhOBka9iy_PEQueE7B2xoGiUcVYyVKvPUSJfZQQeE8y0wAIrzxj_JhURvv-Ma4LYcIZWTfqSfPLUfq-61qPAVHkbLvZokAL4Gm_2cDnDLyMj_5-jMb0wWaDN8qLdehn5Wawv_2LSu9crkr3wKBWaLDG4RHsgbTVRuADsLfSaYC-a-7e2_YWxvyYHWC9zgn1YT5UkN8Aau2vF5GIF2f40XDqm-ORgHxIXXe6e5iucQ.BScQd7l63jnSHGKi4k8kTP5vVKnlSqLpV4B2GMIYjmU&qid=1789308611&sr=8-5-spons&channelId=500&ref_=sr_1_5_sspa&plpRedirect=mhFallback" target="_blank">Arduino nano</a></td>
           <td class="tag not-ordered">not-ordered</td>
+          <td class="weight">0.25 oz</td>
           <td class="notes">Amazon - 2 pack - $9.99</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
           <td class="item">Styrofoam Container</td>
           <td class="tag not-ordered">not-ordered</td>
+          <td class="weight">TBD</td>
           <td class="notes">No estimate yet</td>
+        </tr>
+        <tr class="total-row">
+          <td></td>
+          <td class="item">Total weight</td>
+          <td></td>
+          <td class="weight">~11.90 oz</td>
+          <td class="notes">Excludes Balloon Kit, Helium (N/A), and Styrofoam Container (TBD)</td>
+        </tr>
+        <tr class="total-row">
+          <td></td>
+          <td class="item">Total cost</td>
+          <td></td>
+          <td class="weight">$859.36</td>
+          <td class="notes">Includes Helium rough estimate ($250); excludes Styrofoam Container (no estimate)</td>
         </tr>
         <!--
         Tag options: "acquired" (received), "ordered" (ordered, not yet received), "not-ordered" (decided, not yet ordered)
@@ -392,6 +442,7 @@
           <td class="qty">1x</td>
           <td class="item">Item name</td>
           <td class="tag not-ordered">not ordered</td>
+          <td class="weight">Weight</td>
           <td class="notes">Notes / vendor / price</td>
         </tr>
         -->
@@ -406,19 +457,22 @@
           <td class="qty">1x</td>
           <td class="item"><a href="https://www.amazon.com/EC-Buying-Accelerometer-Gyroscope-Module16-Bit/dp/B0B3D6D1KD/" target="_blank">Accelerometer/Gyroscope Module (16-bit)</a></td>
           <td class="tag researching">researching</td>
+          <td class="weight">~0.42 oz</td>
           <td class="notes">Amazon - EC Buying - $9.59</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
           <td class="item"><a href="https://www.amazon.com/Visible-Spectrum-Infrared-Spectrometer-arduino/dp/B0DBQKDV67/" target="_blank">Spectrometer (Visible/Infrared)</a></td>
           <td class="tag researching">researching</td>
-          <td class="notes">Amazon</td>
+          <td class="weight">~0.53 oz</td>
+          <td class="notes">Amazon - $19.99</td>
         </tr>
         <!--
         <tr>
           <td class="qty">1x</td>
           <td class="item">GPS tracker</td>
           <td class="tag researching">researching</td>
+          <td class="weight">Weight</td>
           <td class="notes"><a href="" target="_blank">link</a> - ~$60, comparing options</td>
         </tr>
         -->
