@@ -199,6 +199,12 @@
     font-size:11.5px;
     font-style:italic;
   }
+  tr.total-row td.item.bought{ color:var(--teal); }
+  tr.total-row td.item.pending{ color:var(--coral); }
+  tr.total-row td.item.grand{ color:var(--gold); }
+  tr.total-row td.weight.bought{ color:var(--teal); }
+  tr.total-row td.weight.pending{ color:var(--coral); }
+  tr.total-row td.weight.grand{ color:var(--gold); font-weight:700; }
 
   table.rows td{
     padding:13px 6px;
@@ -230,6 +236,7 @@
   td.tag.ordered{ color:var(--gold); }
   td.tag.not-ordered{ color:var(--coral); }
   td.tag.researching{ color:var(--gold); }
+  td.tag.not-using{ color:var(--coral); }
   td.weight{
     width:0.75in;
     font-family:'JetBrains Mono', monospace;
@@ -424,10 +431,10 @@
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item">GoPro Battery Pack</td>
+          <td class="item"><a href="https://www.anker.com/products/a1229" target="_blank">Anker 313 Power Bank</a></td>
           <td class="tag not-ordered">not-ordered</td>
-          <td class="weight">TBD</td>
-          <td class="notes">Need to confirm GoPro model before ordering the right battery</td>
+          <td class="weight">7.5 oz</td>
+          <td class="notes">10000 milliamp hours - $25.99</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
@@ -436,19 +443,51 @@
           <td class="weight">TBD</td>
           <td class="notes">No estimate yet</td>
         </tr>
-        <tr class="total-row">
-          <td></td>
-          <td class="item">Total weight</td>
-          <td></td>
-          <td class="weight">11.59 oz</td>
-          <td class="notes">Counts only 6 of the 8 AA batteries (2 spares); excludes Balloon Kit, Helium (N/A), and Styrofoam Container (TBD)</td>
+        <tr>
+          <td class="qty">1x</td>
+          <td class="item"><a href="https://www.amazon.com/EC-Buying-Accelerometer-Gyroscope-Module16-Bit/dp/B0B3D6D1KD/" target="_blank">Accelerometer/Gyroscope Module (16-bit)</a></td>
+          <td class="tag not-ordered">not-ordered</td>
+          <td class="weight">~0.42 oz (est.)</td>
+          <td class="notes">Amazon - EC Buying - $9.59</td>
+        </tr>
+        <tr>
+          <td class="qty">1x</td>
+          <td class="item"><a href="https://www.amazon.com/HotHands-Body-Hand-Super-Warmers/dp/B00KDHJBAK/" target="_blank">HotHands Body & Hand Super Warmers</a></td>
+          <td class="tag not-ordered">not-ordered</td>
+          <td class="weight">~0.75 oz (est.)</td>
+          <td class="notes">Amazon - $7.48</td>
+        </tr>
+        <tr>
+          <td class="qty">1x</td>
+          <td class="item"><a href="https://www.amazon.com/Rindion-Compatible-Prototype-Electronics-Soldering/dp/B0DBZ1BXFZ/" target="_blank">Perfboard</a></td>
+          <td class="tag not-ordered">not-ordered</td>
+          <td class="weight">~5 oz (est.)</td>
+          <td class="notes">Amazon - $7.99</td>
+        </tr>
+        <tr>
+          <td class="qty">1x</td>
+          <td class="item"><a href="https://www.amazon.com/TOWOT-Purity-Electrical-Soldering-Content/dp/B09KM2LW4G/" target="_blank">Solder Wire</a></td>
+          <td class="tag not-ordered">not-ordered</td>
+          <td class="weight">TBD</td>
+          <td class="notes">Amazon - $7.39</td>
         </tr>
         <tr class="total-row">
           <td></td>
-          <td class="item">Total cost</td>
+          <td class="item bought">Already Bought</td>
           <td></td>
-          <td class="weight">$848.21 (est.)</td>
-          <td class="notes">Includes Helium rough estimate ($250); excludes Styrofoam Container (no estimate)</td>
+          <td class="weight bought" colspan="2">5.43 oz &middot; $548.99</td>
+        </tr>
+        <tr class="total-row">
+          <td></td>
+          <td class="item pending">Still to Buy</td>
+          <td></td>
+          <td class="weight pending" colspan="2">19.83 oz &middot; $357.66 (est.)</td>
+        </tr>
+        <tr class="total-row">
+          <td></td>
+          <td class="item grand">Total</td>
+          <td></td>
+          <td class="weight grand" colspan="2">25.26 oz &middot; $906.65 (est.)</td>
         </tr>
         <!--
         Tag options: "acquired" (received), "ordered" (ordered, not yet received), "not-ordered" (decided, not yet ordered)
@@ -469,44 +508,23 @@
       <table class="rows">
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/EC-Buying-Accelerometer-Gyroscope-Module16-Bit/dp/B0B3D6D1KD/" target="_blank">Accelerometer/Gyroscope Module (16-bit)</a></td>
-          <td class="tag researching">researching</td>
-          <td class="weight">~0.42 oz (est.)</td>
-          <td class="notes">Amazon - EC Buying - $9.59</td>
-        </tr>
-        <tr>
-          <td class="qty">1x</td>
           <td class="item"><a href="https://www.amazon.com/Visible-Spectrum-Infrared-Spectrometer-arduino/dp/B0DBQKDV67/" target="_blank">Spectrometer (Visible/Infrared)</a></td>
-          <td class="tag researching">researching</td>
+          <td class="tag not-using">not using</td>
           <td class="weight">~0.53 oz (est.)</td>
           <td class="notes">Amazon - $19.99</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
           <td class="item"><a href="https://www.amazon.com/ACEBOTT-Development-Board-Compatible-Arduino/dp/B0D5D7Q42V/" target="_blank">ESP32 Development Board</a></td>
-          <td class="tag researching">researching</td>
+          <td class="tag not-using">not using</td>
           <td class="weight">~3.53 oz (est.)</td>
           <td class="notes">Amazon - ACEBOTT - $11.99</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/HotHands-Hand-Warmers-Odorless-Activated/dp/B0007ZF4OA" target="_blank">HotHands Hand Warmers (40 Pairs)</a></td>
-          <td class="tag researching">researching</td>
-          <td class="weight">~0.75 oz each (est.)</td>
-          <td class="notes">Amazon - $25.60</td>
-        </tr>
-        <tr>
-          <td class="qty">1x</td>
           <td class="item"><a href="https://www.amazon.com/BOJACK-Values-Solderless-Breadboard-Flexible/dp/B08Y59P6D1/" target="_blank">Breadboard and Wires</a></td>
-          <td class="tag researching">researching</td>
+          <td class="tag not-using">not using</td>
           <td class="weight">~6 oz (est.)</td>
-          <td class="notes">Amazon - $9.99</td>
-        </tr>
-        <tr>
-          <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/ELEGOO-Double-Sided-Prototype-Compatible-Soldering/dp/B072Z7Y19F" target="_blank">Perfboard</a></td>
-          <td class="tag researching">researching</td>
-          <td class="weight">~5 oz (est.)</td>
           <td class="notes">Amazon - $9.99</td>
         </tr>
         <!--
