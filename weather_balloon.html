@@ -19,6 +19,46 @@
 
   * { margin:0; padding:0; box-sizing:border-box; }
 
+  .sr-only{
+    position:absolute;
+    width:1px; height:1px;
+    padding:0; margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
+  }
+
+  a:focus-visible,
+  button:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:2px;
+    border-radius:2px;
+  }
+
+  @media (prefers-contrast: more){
+    :root{
+      --hair: rgba(234, 242, 255, 0.6);
+    }
+    .page{
+      background:#0a0e24;
+      backdrop-filter:none;
+    }
+    .manifest-note, footer .tagline, .countdown .target-date, td.weight, td.notes{
+      color:var(--starlight);
+    }
+    a{
+      text-decoration:underline;
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce){
+    .page{
+      background:#0a0e24;
+      backdrop-filter:none;
+    }
+  }
+
   html, body{
     min-height:100%;
   }
@@ -54,7 +94,7 @@
     z-index:10;
     width:100%;
     max-width:720px;
-    background:rgba(10,14,36,0.55);
+    background:rgba(10,14,36,0.72);
     backdrop-filter:blur(10px);
     border:1px solid var(--hair);
     border-radius:10px;
@@ -71,17 +111,17 @@
     padding-bottom:16px; margin-bottom:22px;
   }
 
-  h2{
+  h1{
     font-family:'Space Grotesk', sans-serif;
     font-weight:700;
     font-size:34px;
     letter-spacing:-0.01em;
   }
-  h2 .accent{ color:var(--teal); }
+  h1 .accent{ color:var(--teal); }
 
   .manifest-note{
     font-size:12px;
-    color:rgba(234,242,255,0.6);
+    color:rgba(234,242,255,0.75);
     max-width:2.3in;
     text-align:right;
     line-height:1.4;
@@ -130,11 +170,11 @@
     font-size:9.5px;
     letter-spacing:0.1em;
     text-transform:uppercase;
-    color:rgba(234,242,255,0.55);
+    color:rgba(234,242,255,0.65);
   }
   .countdown .target-date{
     font-size:12px;
-    color:rgba(234,242,255,0.6);
+    color:rgba(234,242,255,0.75);
   }
 
   .manifest{
@@ -165,6 +205,7 @@
   }
   .name{
     font-family:'JetBrains Mono', monospace;
+    font-weight:500;
     font-size:12px;
     letter-spacing:0.16em;
     text-transform:uppercase;
@@ -241,12 +282,12 @@
     width:0.75in;
     font-family:'JetBrains Mono', monospace;
     font-size:11.5px;
-    color:rgba(234,242,255,0.55);
+    color:rgba(234,242,255,0.68);
     white-space:nowrap;
   }
   td.notes{
     font-size:12.5px;
-    color:rgba(234,242,255,0.65);
+    color:rgba(234,242,255,0.75);
   }
 
   /* checklist rows for tasks / todo */
@@ -256,13 +297,13 @@
     text-align:center;
   }
   tr.done td.item{
-    color:rgba(234,242,255,0.45);
+    color:rgba(234,242,255,0.7);
     text-decoration:line-through;
   }
 
   .empty-row td{
     font-size:12.5px;
-    color:rgba(234,242,255,0.4);
+    color:rgba(234,242,255,0.65);
     font-style:italic;
     padding:13px 6px;
   }
@@ -332,12 +373,34 @@
   footer .tagline{
     font-family:'Space Grotesk', sans-serif;
     font-size:12.5px;
-    color:rgba(234,242,255,0.5);
+    color:rgba(234,242,255,0.75);
+  }
+
+  /* parts tables: stack each row into a small card on narrow screens */
+  @media (max-width:600px){
+    table.parts, table.parts thead, table.parts tbody{ display:block; }
+    table.parts tr{
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      column-gap:10px;
+      row-gap:4px;
+      padding:12px 0;
+    }
+    table.parts td{ padding:0; width:auto; }
+    table.parts td.qty{ grid-row:1 / span 3; }
+    table.parts td.weight,
+    table.parts td.notes{ grid-column:2 / 4; white-space:normal; }
+    table.parts tr.total-row{ padding:10px 0; }
+    table.parts tr.total-row td:empty{ display:none; }
+    table.parts tr.total-row td.item{ grid-column:1 / 3; }
+    table.parts tr.total-row td.weight{ grid-column:3; text-align:right; }
+    table.parts td.item, table.parts td.notes{ overflow-wrap:anywhere; }
   }
 
   @media (max-width:520px){
-    .page{ padding:0.5in 0.4in 0.4in; }
-    h2{ font-size:26px; }
+    body{ padding:20px 10px; }
+    .page{ padding:28px 16px 22px; }
+    h1{ font-size:26px; }
     header{ flex-direction:column; align-items:flex-start; }
     .manifest-note{ text-align:left; max-width:none; }
     .countdown .clock{ gap:12px; }
@@ -348,34 +411,49 @@
 </head>
 <body>
 
-<div class="backdrop"><img src="galactic-center.jpg" alt=""></div>
+<div class="backdrop" aria-hidden="true"><img src="galactic-center.jpg" alt=""></div>
 
 <div class="page">
   <a class="back-link" href="index.html">&larr; Back to Schedule</a>
 
   <header>
-    <h2>WEATHER <span class="accent">BALLOON</span><br>MISSION STATUS</h2>
+    <h1>WEATHER <span class="accent">BALLOON</span><br>MISSION STATUS</h1>
     <div class="manifest-note">Build progress, procurement, and launch prep - updated as we go.</div>
   </header>
 
+  <main>
+
   <!-- ---------- Countdown: edit LAUNCH_DATE below to change the target ---------- -->
   <div class="countdown">
-    <div class="label">Time Until Launch</div>
-    <div class="clock" id="countdown-clock">
+    <div class="label" id="countdown-label">Time Until Launch</div>
+    <div class="clock" id="countdown-clock" aria-hidden="true">
       <div class="unit"><span class="num" id="cd-days">--</span><span class="unit-label">days</span></div>
       <div class="unit"><span class="num" id="cd-hours">--</span><span class="unit-label">hrs</span></div>
       <div class="unit"><span class="num" id="cd-mins">--</span><span class="unit-label">min</span></div>
       <div class="unit"><span class="num" id="cd-secs">--</span><span class="unit-label">sec</span></div>
     </div>
-    <div class="target-date" id="cd-target-date"></div>
+    <div class="target-date" id="cd-target-date" aria-describedby="countdown-label"></div>
   </div>
+
+  <p class="sr-only">External links on this page (products, Discord) open in a new browser tab.</p>
 
   <div class="manifest">
 
     <!-- ---------- Parts we've decided on ---------- -->
     <div class="section-block">
-      <div class="section-label"><span class="dot teal"></span><span class="name">Parts - Decided</span></div>
-      <table class="rows">
+      <div class="section-label"><span class="dot teal" aria-hidden="true"></span><h2 class="name">Parts - Decided</h2></div>
+      <table class="rows parts">
+        <caption class="sr-only">Parts already decided on</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="sr-only">Qty</th>
+            <th scope="col" class="sr-only">Item</th>
+            <th scope="col" class="sr-only">Status</th>
+            <th scope="col" class="sr-only">Weight</th>
+            <th scope="col" class="sr-only">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
         <tr>
           <td class="qty">1x</td>
           <td class="item">GoPro</td>
@@ -385,21 +463,21 @@
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.the-rocketman.com/products/hab-kit-complete-package" target="_blank">Balloon Kit</a></td>
+          <td class="item"><a href="https://www.the-rocketman.com/products/hab-kit-complete-package" target="_blank" rel="noopener noreferrer">Balloon Kit</a></td>
           <td class="tag acquired">acquired</td>
           <td class="weight">N/A</td>
           <td class="notes">Ordered from Rocket Man - $425</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/dp/B08F998MFH" target="_blank">Spot Gen 4 Satellite GPS Messenger</a></td>
+          <td class="item"><a href="https://www.amazon.com/dp/B08F998MFH" target="_blank" rel="noopener noreferrer">Spot Gen 4 Satellite GPS Messenger</a></td>
           <td class="tag acquired">acquired</td>
           <td class="weight">5.01 oz</td>
           <td class="notes">Amazon - $99.99</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/Apple-AirTag-2nd-Generation-Precision/dp/B0GJTFXNRX/" target="_blank">Apple AirTag (2nd Gen)</a></td>
+          <td class="item"><a href="https://www.amazon.com/Apple-AirTag-2nd-Generation-Precision/dp/B0GJTFXNRX/" target="_blank" rel="noopener noreferrer">Apple AirTag (2nd Gen)</a></td>
           <td class="tag acquired">acquired</td>
           <td class="weight">0.42 oz</td>
           <td class="notes">Amazon - $24.00</td>
@@ -413,35 +491,35 @@
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/dp/B0BNHJJMB5" target="_blank">BME280 Temp/Humidity/Pressure Sensor</a></td>
+          <td class="item"><a href="https://www.amazon.com/dp/B0BNHJJMB5" target="_blank" rel="noopener noreferrer">BME280 Temp/Humidity/Pressure Sensor</a></td>
           <td class="tag acquired">acquired</td>
           <td class="weight">1.41 oz</td>
           <td class="notes">Amazon - $14.35</td>
         </tr>
         <tr>
           <td class="qty">6x</td>
-          <td class="item"><a href="https://www.amazon.com/Energizer-Ultimate-Lithium-Battery-Package/dp/B00EAKP8S0" target="_blank">Energizer Ultimate Lithium AA (8 Pack)</a></td>
+          <td class="item"><a href="https://www.amazon.com/Energizer-Ultimate-Lithium-Battery-Package/dp/B00EAKP8S0" target="_blank" rel="noopener noreferrer">Energizer Ultimate Lithium AA (8 Pack)</a></td>
           <td class="tag acquired">acquired</td>
           <td class="weight">0.51 oz each</td>
           <td class="notes">Amazon - $15.99 for 8-pack; 6 in series (~9V) power Arduino Nano circuit via VIN, 2 spares</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/dp/B0H11VRYCL?lv=shuf&crid=3LOOR0EXYRE31&keywords=Arduino%2BNano&sprefix=arduino%2Bnano%2Caps%2C171&th=1&dib_tag=se&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&dib=eyJ2IjoiMSJ9.ASXhOBka9iy_PEQueE7B2xoGiUcVYyVKvPUSJfZQQeE8y0wAIrzxj_JhURvv-Ma4LYcIZWTfqSfPLUfq-61qPAVHkbLvZokAL4Gm_2cDnDLyMj_5-jMb0wWaDN8qLdehn5Wawv_2LSu9crkr3wKBWaLDG4RHsgbTVRuADsLfSaYC-a-7e2_YWxvyYHWC9zgn1YT5UkN8Aau2vF5GIF2f40XDqm-ORgHxIXXe6e5iucQ.BScQd7l63jnSHGKi4k8kTP5vVKnlSqLpV4B2GMIYjmU&qid=1789308611&sr=8-5-spons&channelId=500&ref_=sr_1_5_sspa&plpRedirect=mhFallback" target="_blank">Arduino nano</a></td>
+          <td class="item"><a href="https://www.amazon.com/dp/B0H11VRYCL?lv=shuf&crid=3LOOR0EXYRE31&keywords=Arduino%2BNano&sprefix=arduino%2Bnano%2Caps%2C171&th=1&dib_tag=se&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&dib=eyJ2IjoiMSJ9.ASXhOBka9iy_PEQueE7B2xoGiUcVYyVKvPUSJfZQQeE8y0wAIrzxj_JhURvv-Ma4LYcIZWTfqSfPLUfq-61qPAVHkbLvZokAL4Gm_2cDnDLyMj_5-jMb0wWaDN8qLdehn5Wawv_2LSu9crkr3wKBWaLDG4RHsgbTVRuADsLfSaYC-a-7e2_YWxvyYHWC9zgn1YT5UkN8Aau2vF5GIF2f40XDqm-ORgHxIXXe6e5iucQ.BScQd7l63jnSHGKi4k8kTP5vVKnlSqLpV4B2GMIYjmU&qid=1789308611&sr=8-5-spons&channelId=500&ref_=sr_1_5_sspa&plpRedirect=mhFallback" target="_blank" rel="noopener noreferrer">Arduino nano</a></td>
           <td class="tag acquired">acquired</td>
           <td class="weight">0.25 oz</td>
           <td class="notes">Amazon - 2 pack - $9.99</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/Interface-Arduino-Raspberry-Breakout-Cable%EF%BC%88Pack/dp/B07MTTLF75" target="_blank">SD Card Reader Breakout Board w/ Jumper Cable</a></td>
+          <td class="item"><a href="https://www.amazon.com/Interface-Arduino-Raspberry-Breakout-Cable%EF%BC%88Pack/dp/B07MTTLF75" target="_blank" rel="noopener noreferrer">SD Card Reader Breakout Board w/ Jumper Cable</a></td>
           <td class="tag acquired">acquired</td>
           <td class="weight">1.44 oz</td>
           <td class="notes">Amazon - $8.89</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.anker.com/products/a1229" target="_blank">Anker 313 Power Bank</a></td>
+          <td class="item"><a href="https://www.anker.com/products/a1229" target="_blank" rel="noopener noreferrer">Anker 313 Power Bank</a></td>
           <td class="tag acquired">acquired</td>
           <td class="weight">7.5 oz</td>
           <td class="notes">10000 milliamp hours - $25.99</td>
@@ -455,28 +533,28 @@
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/EC-Buying-Accelerometer-Gyroscope-Module16-Bit/dp/B0B3D6D1KD/" target="_blank">Accelerometer/Gyroscope Module (16-bit)</a></td>
+          <td class="item"><a href="https://www.amazon.com/EC-Buying-Accelerometer-Gyroscope-Module16-Bit/dp/B0B3D6D1KD/" target="_blank" rel="noopener noreferrer">Accelerometer/Gyroscope Module (16-bit)</a></td>
           <td class="tag acquired">acquired</td>
           <td class="weight">~0.42 oz (est.)</td>
           <td class="notes">Amazon - EC Buying - $9.59</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/HotHands-Body-Hand-Super-Warmers/dp/B00KDHJBAK/" target="_blank">HotHands Body & Hand Super Warmers</a></td>
+          <td class="item"><a href="https://www.amazon.com/HotHands-Body-Hand-Super-Warmers/dp/B00KDHJBAK/" target="_blank" rel="noopener noreferrer">HotHands Body & Hand Super Warmers</a></td>
           <td class="tag acquired">acquired</td>
           <td class="weight">~0.75 oz (est.)</td>
           <td class="notes">Amazon - $7.48</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/Rindion-Compatible-Prototype-Electronics-Soldering/dp/B0DBZ1BXFZ/" target="_blank">Perfboard</a></td>
+          <td class="item"><a href="https://www.amazon.com/Rindion-Compatible-Prototype-Electronics-Soldering/dp/B0DBZ1BXFZ/" target="_blank" rel="noopener noreferrer">Perfboard</a></td>
           <td class="tag acquired">acquired</td>
           <td class="weight">~5 oz (est.)</td>
           <td class="notes">Amazon - $7.99</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/TOWOT-Purity-Electrical-Soldering-Content/dp/B09KM2LW4G/" target="_blank">Solder Wire</a></td>
+          <td class="item"><a href="https://www.amazon.com/TOWOT-Purity-Electrical-Soldering-Content/dp/B09KM2LW4G/" target="_blank" rel="noopener noreferrer">Solder Wire</a></td>
           <td class="tag acquired">acquired</td>
           <td class="weight">TBD</td>
           <td class="notes">Amazon - $7.39</td>
@@ -509,30 +587,42 @@
           <td class="notes">Notes / vendor / price</td>
         </tr>
         -->
+        </tbody>
       </table>
     </div>
 
     <!-- ---------- Parts we're considering ---------- -->
     <div class="section-block">
-      <div class="section-label"><span class="dot gold"></span><span class="name">Parts - Considering</span></div>
-      <table class="rows">
+      <div class="section-label"><span class="dot gold" aria-hidden="true"></span><h2 class="name">Parts - Considering</h2></div>
+      <table class="rows parts">
+        <caption class="sr-only">Parts under consideration, not yet used</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="sr-only">Qty</th>
+            <th scope="col" class="sr-only">Item</th>
+            <th scope="col" class="sr-only">Status</th>
+            <th scope="col" class="sr-only">Weight</th>
+            <th scope="col" class="sr-only">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/Visible-Spectrum-Infrared-Spectrometer-arduino/dp/B0DBQKDV67/" target="_blank">Spectrometer (Visible/Infrared)</a></td>
+          <td class="item"><a href="https://www.amazon.com/Visible-Spectrum-Infrared-Spectrometer-arduino/dp/B0DBQKDV67/" target="_blank" rel="noopener noreferrer">Spectrometer (Visible/Infrared)</a></td>
           <td class="tag not-using">not using</td>
           <td class="weight">~0.53 oz (est.)</td>
           <td class="notes">Amazon - $19.99</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/ACEBOTT-Development-Board-Compatible-Arduino/dp/B0D5D7Q42V/" target="_blank">ESP32 Development Board</a></td>
+          <td class="item"><a href="https://www.amazon.com/ACEBOTT-Development-Board-Compatible-Arduino/dp/B0D5D7Q42V/" target="_blank" rel="noopener noreferrer">ESP32 Development Board</a></td>
           <td class="tag not-using">not using</td>
           <td class="weight">~3.53 oz (est.)</td>
           <td class="notes">Amazon - ACEBOTT - $11.99</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item"><a href="https://www.amazon.com/BOJACK-Values-Solderless-Breadboard-Flexible/dp/B08Y59P6D1/" target="_blank">Breadboard and Wires</a></td>
+          <td class="item"><a href="https://www.amazon.com/BOJACK-Values-Solderless-Breadboard-Flexible/dp/B08Y59P6D1/" target="_blank" rel="noopener noreferrer">Breadboard and Wires</a></td>
           <td class="tag not-using">not using</td>
           <td class="weight">~6 oz (est.)</td>
           <td class="notes">Amazon - $9.99</td>
@@ -543,29 +633,39 @@
           <td class="item">GPS tracker</td>
           <td class="tag researching">researching</td>
           <td class="weight">Weight</td>
-          <td class="notes"><a href="" target="_blank">link</a> - ~$60, comparing options</td>
+          <td class="notes"><a href="" target="_blank" rel="noopener noreferrer">link</a> - ~$60, comparing options</td>
         </tr>
         -->
+        </tbody>
       </table>
     </div>
 
     <!-- ---------- Completed tasks ---------- -->
     <div class="section-block">
-      <div class="section-label"><span class="dot teal"></span><span class="name">Tasks - Complete</span></div>
+      <div class="section-label"><span class="dot teal" aria-hidden="true"></span><h2 class="name">Tasks - Complete</h2></div>
       <table class="rows">
+        <caption class="sr-only">Completed tasks</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="sr-only">Done</th>
+            <th scope="col" class="sr-only">Task</th>
+            <th scope="col" class="sr-only">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
         <tr class="done">
-          <td class="check">&#10003;</td>
-          <td class="item">Apply for SEDS grant</td>
+          <td class="check" aria-hidden="true">&#10003;</td>
+          <td class="item"><span class="sr-only">Completed: </span>Apply for SEDS grant</td>
           <td class="notes">Received</td>
         </tr>
         <tr class="done">
-          <td class="check">&#10003;</td>
-          <td class="item">Decide on key data points to collect</td>
+          <td class="check" aria-hidden="true">&#10003;</td>
+          <td class="item"><span class="sr-only">Completed: </span>Decide on key data points to collect</td>
           <td class="notes"></td>
         </tr>
         <tr class="done">
-          <td class="check">&#10003;</td>
-          <td class="item">Finish buying parts</td>
+          <td class="check" aria-hidden="true">&#10003;</td>
+          <td class="item"><span class="sr-only">Completed: </span>Finish buying parts</td>
           <td class="notes"></td>
         </tr>
         <!--
@@ -575,26 +675,36 @@
           <td class="notes">Finished Sep 10</td>
         </tr>
         -->
+        </tbody>
       </table>
     </div>
 
     <!-- ---------- TODO ---------- -->
     <div class="section-block">
-      <div class="section-label"><span class="dot coral"></span><span class="name">TODO</span></div>
+      <div class="section-label"><span class="dot coral" aria-hidden="true"></span><h2 class="name">TODO</h2></div>
       <table class="rows">
+        <caption class="sr-only">Remaining tasks</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="sr-only">Done</th>
+            <th scope="col" class="sr-only">Task</th>
+            <th scope="col" class="sr-only">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
         <tr>
-          <td class="check">&#9633;</td>
-          <td class="item">Test parts</td>
+          <td class="check" aria-hidden="true">&#9633;</td>
+          <td class="item"><span class="sr-only">Not completed: </span>Test parts</td>
           <td class="notes"></td>
         </tr>
         <tr>
-          <td class="check">&#9633;</td>
-          <td class="item">Practice launch</td>
+          <td class="check" aria-hidden="true">&#9633;</td>
+          <td class="item"><span class="sr-only">Not completed: </span>Practice launch</td>
           <td class="notes"></td>
         </tr>
         <tr>
-          <td class="check">&#9633;</td>
-          <td class="item">Launch</td>
+          <td class="check" aria-hidden="true">&#9633;</td>
+          <td class="item"><span class="sr-only">Not completed: </span>Launch</td>
           <td class="notes"></td>
         </tr>
         <!--
@@ -604,6 +714,7 @@
           <td class="notes">Due before launch week</td>
         </tr>
         -->
+        </tbody>
       </table>
     </div>
 
@@ -614,14 +725,16 @@
       <img src="qr-code.png" alt="QR code linking to the Space Techs Discord server">
     </div>
     <div class="standing-col">
-      <div class="label">Join the Discord</div>
-      <div class="value">OTC SEDS - Space Techs server<br><a href="https://discord.gg/9ZQ2pAdfsm" target="_blank">discord.gg/9ZQ2pAdfsm</a></div>
+      <div class="label" id="discord-label-wb">Join the Discord</div>
+      <div class="value">OTC SEDS - Space Techs server<br><a href="https://discord.gg/9ZQ2pAdfsm" target="_blank" rel="noopener noreferrer" aria-describedby="discord-label-wb">discord.gg/9ZQ2pAdfsm</a></div>
     </div>
     <div class="standing-col">
-      <div class="label">Questions</div>
-      <div class="value">spacetechs@otc.edu</div>
+      <div class="label" id="questions-label-wb">Questions</div>
+      <div class="value"><a href="mailto:spacetechs@otc.edu" aria-describedby="questions-label-wb">spacetechs@otc.edu</a></div>
     </div>
   </div>
+
+  </main>
 
   <footer>
     <div class="tagline">Up, up, and away.</div>
