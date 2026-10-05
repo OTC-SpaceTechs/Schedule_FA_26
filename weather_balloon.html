@@ -175,7 +175,17 @@
   .countdown .target-date{
     font-size:12px;
     color:rgba(234,242,255,0.75);
+    max-width:46ch;
+    line-height:1.5;
   }
+  .countdown .banner-headline{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:28px;
+    letter-spacing:-0.01em;
+    color:var(--starlight);
+  }
+  .countdown .banner-headline .accent{ color:var(--teal); }
 
   .manifest{
     display:flex;
@@ -406,6 +416,7 @@
     .countdown .clock{ gap:12px; }
     .countdown .unit{ min-width:44px; }
     .countdown .unit .num{ font-size:24px; }
+    .countdown .banner-headline{ font-size:23px; }
   }
 </style>
 </head>
@@ -423,16 +434,11 @@
 
   <main>
 
-  <!-- ---------- Countdown: edit LAUNCH_DATE below to change the target ---------- -->
+  <!-- ---------- Launch complete / flight data coming soon ---------- -->
   <div class="countdown">
-    <div class="label" id="countdown-label">Time Until Launch</div>
-    <div class="clock" id="countdown-clock" aria-hidden="true">
-      <div class="unit"><span class="num" id="cd-days">--</span><span class="unit-label">days</span></div>
-      <div class="unit"><span class="num" id="cd-hours">--</span><span class="unit-label">hrs</span></div>
-      <div class="unit"><span class="num" id="cd-mins">--</span><span class="unit-label">min</span></div>
-      <div class="unit"><span class="num" id="cd-secs">--</span><span class="unit-label">sec</span></div>
-    </div>
-    <div class="target-date" id="cd-target-date" aria-describedby="countdown-label"></div>
+    <div class="label">Mission Complete &middot; Launched Oct 4, 2026</div>
+    <div class="banner-headline">Flight Data <span class="accent">Coming Soon</span></div>
+    <div class="target-date">The launch was a success! A page with data from the flight is on the way.</div>
   </div>
 
   <p class="sr-only">External links on this page (products, Discord) open in a new browser tab.</p>
@@ -485,9 +491,9 @@
         <tr>
           <td class="qty">1x</td>
           <td class="item">Helium</td>
-          <td class="tag not-ordered">not-ordered</td>
+          <td class="tag acquired">acquired</td>
           <td class="weight">N/A</td>
-          <td class="notes">Rough estimate - $250</td>
+          <td class="notes">$250.00</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
@@ -526,10 +532,24 @@
         </tr>
         <tr>
           <td class="qty">1x</td>
-          <td class="item">Styrofoam Container</td>
-          <td class="tag not-ordered">not-ordered</td>
+          <td class="item">Insulation Foam</td>
+          <td class="tag acquired">acquired</td>
           <td class="weight">TBD</td>
-          <td class="notes">No estimate yet</td>
+          <td class="notes">Used instead of a styrofoam container - $17.98</td>
+        </tr>
+        <tr>
+          <td class="qty">1x</td>
+          <td class="item">Duct Tape (Bright Orange)</td>
+          <td class="tag acquired">acquired</td>
+          <td class="weight">TBD</td>
+          <td class="notes">$10.50</td>
+        </tr>
+        <tr>
+          <td class="qty">1x</td>
+          <td class="item">SB GG Kit</td>
+          <td class="tag acquired">acquired</td>
+          <td class="weight">TBD</td>
+          <td class="notes">Receipt item, UPC 018239356170 - $9.12</td>
         </tr>
         <tr>
           <td class="qty">1x</td>
@@ -561,21 +581,9 @@
         </tr>
         <tr class="total-row">
           <td></td>
-          <td class="item bought">Already Bought</td>
+          <td class="item grand">Total Spent</td>
           <td></td>
-          <td class="weight bought" colspan="2">25.26 oz &middot; $656.65</td>
-        </tr>
-        <tr class="total-row">
-          <td></td>
-          <td class="item pending">Still to Buy</td>
-          <td></td>
-          <td class="weight pending" colspan="2">TBD &middot; $250.00 (est.)</td>
-        </tr>
-        <tr class="total-row">
-          <td></td>
-          <td class="item grand">Total</td>
-          <td></td>
-          <td class="weight grand" colspan="2">25.26 oz &middot; $906.65 (est.)</td>
+          <td class="weight grand" colspan="2">30 oz (measured) &middot; $944.25</td>
         </tr>
         <!--
         Tag options: "acquired" (received), "ordered" (ordered, not yet received), "not-ordered" (decided, not yet ordered)
@@ -668,6 +676,21 @@
           <td class="item"><span class="sr-only">Completed: </span>Finish buying parts</td>
           <td class="notes"></td>
         </tr>
+        <tr class="done">
+          <td class="check" aria-hidden="true">&#10003;</td>
+          <td class="item"><span class="sr-only">Completed: </span>Test parts</td>
+          <td class="notes"></td>
+        </tr>
+        <tr class="done">
+          <td class="check" aria-hidden="true">&#10003;</td>
+          <td class="item"><span class="sr-only">Completed: </span>Practice launch</td>
+          <td class="notes"></td>
+        </tr>
+        <tr class="done">
+          <td class="check" aria-hidden="true">&#10003;</td>
+          <td class="item"><span class="sr-only">Completed: </span>Launch</td>
+          <td class="notes">Successful!</td>
+        </tr>
         <!--
         <tr class="done">
           <td class="check">&#10003;</td>
@@ -694,18 +717,8 @@
         <tbody>
         <tr>
           <td class="check" aria-hidden="true">&#9633;</td>
-          <td class="item"><span class="sr-only">Not completed: </span>Test parts</td>
-          <td class="notes"></td>
-        </tr>
-        <tr>
-          <td class="check" aria-hidden="true">&#9633;</td>
-          <td class="item"><span class="sr-only">Not completed: </span>Practice launch</td>
-          <td class="notes"></td>
-        </tr>
-        <tr>
-          <td class="check" aria-hidden="true">&#9633;</td>
-          <td class="item"><span class="sr-only">Not completed: </span>Launch</td>
-          <td class="notes"></td>
+          <td class="item"><span class="sr-only">Not completed: </span>Publish flight data page</td>
+          <td class="notes">Coming soon</td>
         </tr>
         <!--
         <tr>
@@ -741,49 +754,6 @@
   </footer>
 </div>
 
-<script>
-  // Edit this to change the launch target. Format: new Date(year, monthIndex(0-11), day, hour, minute)
-  var LAUNCH_DATE = new Date(2026, 9, 4, 9, 0); // Oct 4, 2026, 9:00 AM
-
-  var elDays = document.getElementById('cd-days');
-  var elHours = document.getElementById('cd-hours');
-  var elMins = document.getElementById('cd-mins');
-  var elSecs = document.getElementById('cd-secs');
-  var elTargetDate = document.getElementById('cd-target-date');
-  var elLabel = document.querySelector('.countdown .label');
-
-  elTargetDate.textContent = LAUNCH_DATE.toLocaleDateString(undefined, { weekday:'long', year:'numeric', month:'long', day:'numeric' }) +
-    ' at ' + LAUNCH_DATE.toLocaleTimeString(undefined, { hour:'numeric', minute:'2-digit' });
-
-  function pad(n){ return String(n).padStart(2, '0'); }
-
-  function tick(){
-    var diff = LAUNCH_DATE.getTime() - Date.now();
-
-    if (diff <= 0) {
-      elLabel.textContent = 'Launch Day';
-      elDays.textContent = '00';
-      elHours.textContent = '00';
-      elMins.textContent = '00';
-      elSecs.textContent = '00';
-      return;
-    }
-
-    var totalSecs = Math.floor(diff / 1000);
-    var days = Math.floor(totalSecs / 86400);
-    var hours = Math.floor((totalSecs % 86400) / 3600);
-    var mins = Math.floor((totalSecs % 3600) / 60);
-    var secs = totalSecs % 60;
-
-    elDays.textContent = pad(days);
-    elHours.textContent = pad(hours);
-    elMins.textContent = pad(mins);
-    elSecs.textContent = pad(secs);
-  }
-
-  tick();
-  setInterval(tick, 1000);
-</script>
 
 </body>
 </html>
