@@ -36,7 +36,7 @@ const METRICS = [
 ];
 
 const metric = (key) => METRICS.find((m) => m.key === key);
-const isMin = (m) => m.key === "temp_f" || m.key === "pres";
+const isMin = (m) => m.key === "hum" || m.key === "temp_f" || m.key === "pres";
 
 // ---------- Formatting helpers ----------
 
